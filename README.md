@@ -84,8 +84,8 @@ npm install
 
 1. Crie um projeto no Firebase Console
 2. Ative os serviços:
-   · Authentication (Email/Password)
-   · Firestore Database
+   · Authentication (Email/Password)<br>
+   · Firestore Database<br>
    · Storage
 3. Faça o download do arquivo de configuração environment.ts
 
@@ -179,7 +179,7 @@ firebase deploy
 🎨 Interface do Usuário
 
 · Layout Responsivo: Adaptável a desktop, tablet e mobile<br>
-· Tema Escuro: Interface moderna com tema escuro<b>
+· Tema Escuro: Interface moderna com tema escuro<br>
 · Navegação Intuitiva: Sidebar colapsável em mobile
 
 💬 Sistema de Mensagens
