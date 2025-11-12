@@ -1,0 +1,70 @@
+<!-- src/app/components/chat/chat.component.html -->
+<div class="chat-container">
+  <!-- Sidebar para canais -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h3>Chat App</h3>
+    </div>
+    
+    <div class="channels-section">
+      <div class="section-header">
+        <h4>Canais</h4>
+        <button class="btn-add" (click)="createChannel()">+</button>
+      </div>
+      
+      <div class="channel-list">
+        <div 
+          *ngFor="let channel of channels" 
+          class="channel-item" 
+          [class.active]="selectedChannel?.id === channel.id"
+          (click)="selectChannel(channel)">
+          <span class="channel-prefix">#</span>
+          {{ channel.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Área principal de chat -->
+  <div class="chat-area" *ngIf="selectedChannel">
+    <div class="chat-header">
+      <h4># {{ selectedChannel.name }}</h4>
+      <p class="channel-description">{{ selectedChannel.description }}</p>
+    </div>
+
+    <div class="messages-container">
+      <div *ngFor="let message of messages" class="message">
+        <div class="message-avatar">
+          <img [src]="message.senderPhoto || 'assets/default-avatar.png'" alt="Avatar">
+        </div>
+        
+        <div class="message-content">
+          <div class="message-header">
+            <span class="sender-name">{{ message.senderName }}</span>
+            <span class="message-time">{{ message.timestamp | date:'shortTime' }}</span>
+          </div>
+          
+          <div class="message-text">{{ message.content }}</div>
+          
+          <div class="message-reactions" *ngIf="message.reactions && Object.keys(message.reactions).length > 0">
+            <span 
+              *ngFor="let emoji of Object.keys(message.reactions)" 
+              class="reaction"
+              (click)="addReaction(message, emoji)">
+              {{ emoji }} {{ message.reactions[emoji].length }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="message-input-container">
+      <input 
+        type="text" 
+        [(ngModel)]="newMessage" 
+        (keyup.enter)="sendMessage()"
+        placeholder="Digite sua mensagem...">
+      <button (click)="sendMessage()" [disabled]="!newMessage.trim()">Enviar</button>
+    </div>
+  </div>
+</div>
